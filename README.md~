@@ -1,2 +1,13 @@
 # Lawrence-Style-Checker
+<<<<<<< HEAD
+
+## Basic Description
 A style checking library, built in Java. The object can be used as a style checker in a similar way spelling or grammar checkers are used. 
+
+## UML Diagram
+![UML diagram of Lawrence class](/Lawrence.png?raw=true "Lawrence App UML Diagram")
+=======
+A style checking library, built in Java. The object can be used as a style checker in a similar way a spelling or grammar checker is used to parse text. 
+
+
+>>>>>>> f027f3a3d29a6f554e19c763e9751449fe1c96d9
