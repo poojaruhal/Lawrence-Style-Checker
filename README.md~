@@ -1,0 +1,7 @@
+# Lawrence-Style-Checker
+## Basic Description
+A style checking library, built in Java. The object can be used as a style checker in a similar way spelling or grammar checkers are used. 
+
+This program is similar to the Hemingway App. It identifies flabby sentences and categorizes them into three levels: flabby, needs toning, and good. 
+## UML Diagram
+![UML diagram of Lawrence class](/LawrenceUML.png?raw=true "Lawrence App UML Diagram")
