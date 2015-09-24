@@ -37,7 +37,20 @@ System.out.println(lawrence.fleschKincaidSentence("Here is a good sentence.")); 
 ```
 
 ### Get the status of a sentence
-I have specifically built this library to tell you whether a sentence should be underlined red for bad, orange for semi-bad, and nothing for good. 
+I have specifically built this library to tell you whether a sentence should be underlined red for bad, orange for semi-bad, and nothing for good. I have made the default upperbound 40 and lowerbound 30. Thus, if a sentence is above 40, the program will not demand that it be underlined. However, if the sentence is between 40 and 30, it'll be labeled 1 for needs toning. But if it is below 30, it'll be labeled 2 for flabby. I recommend level 2 sentences be underlined red and level 1 sentences be underlined orange. 
+```java
+// Get score of sentence and status
+// 0 = good; 1 = needs toning; 2 = flabby.
+double[] scoreStatus = lawrence.getScoreAndStatus("Here is an unbelievably reconstruction longitudinal sentence that you may need to reconfiguration down.");
+System.out.println(scoreStatus[0] + " " + scoreStatus[1]);
+```
+
+### You can customize the threshold levels if you want
+To customize the thresholds, say if you want to have ultra strict rules, you can do so when you instantiate the object.
+```java
+Lawrence lawrence = new Lawrence(60, 50) // sets upperbound to 60 and lowerboundd to 50
+```
+
 
 
 

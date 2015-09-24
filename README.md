@@ -51,6 +51,10 @@ To customize the thresholds, say if you want to have ultra strict rules, you can
 Lawrence lawrence = new Lawrence(60, 50) // sets upperbound to 60 and lowerboundd to 50
 ```
 
+### JAR library released and ready to go!
+If you want to use this library quickly, I reccommend downloading the JAR file from the 'releases' link above. Import this library into your Java project and then import and instantiate the object as shown above. 
+
+
 
 
 
