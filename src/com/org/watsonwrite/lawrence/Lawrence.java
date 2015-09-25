@@ -12,15 +12,16 @@ public class Lawrence {
 	// syllables = used to store dictionary of words and syllable counts
 	private Map<String, Integer> syllables = new HashMap<String, Integer>();
 	private int UPPERBOUND = 40; // Scores above this are good.
-	private int LOWERBOUND = 30; // Scores above this need toning, scores below are flabby.
-	
+	private int LOWERBOUND = 30; // Scores above this need toning, scores below
+									// are flabby.
+
 	public Lawrence() throws IOException {
-		/** 
+		/**
 		 * Load syllable dictionary to save time on loading it again.
 		 */
 		loadSyllableDict();
 	}
-	
+
 	public Lawrence(int upper, int lower) throws IOException {
 		/**
 		 * Overload constructor, if the user wants to change the bounds.
@@ -29,22 +30,25 @@ public class Lawrence {
 		this.LOWERBOUND = lower;
 		loadSyllableDict();
 	}
-	
+
 	public double[] getScoreAndStatus(String sentence) {
 		/**
-		 * Calculates the score of a sentence and returns the status.
-		 * The status is whether it is good, needs toning, or flabby. 
+		 * Calculates the score of a sentence and returns the status. The status
+		 * is whether it is good, needs toning, or flabby.
 		 */
-		double[] results = {0,0};
+		double[] results = { 0, 0 };
 		results[0] = fleschKincaidSentence(sentence);
-		
+
 		// 0 = good; 1 = needs toning; 2 = flabby.
-		if (results[0] > UPPERBOUND) results[1] = 0;
-		else if (results[0] > LOWERBOUND) results[1] = 1;
-		else results[1] = 2;
-		
+		if (results[0] > UPPERBOUND)
+			results[1] = 0;
+		else if (results[0] > LOWERBOUND)
+			results[1] = 1;
+		else
+			results[1] = 2;
+
 		return results;
-		
+
 	}
 
 	public double fleschKincaidSentence(String sentence) {
@@ -60,13 +64,13 @@ public class Lawrence {
 			if (isWordInDict(word)) {
 
 				// Get syllable count for each word and add it to syllableCount
-				int syllable = syllables.get(word);	
+				int syllable = syllables.get(word);
 				syllableCount += syllable;
-				
+
 			} else {
-				
+
 				// If word not in dict, count syllables with dodgy method.
-				int syllable = countSyllables(word);
+				int syllable = countSyllablesLight(word);
 				syllableCount += syllable;
 			}
 		}
@@ -74,11 +78,11 @@ public class Lawrence {
 		double kincaidScore = fleschKincaid(wordCount, syllableCount);
 		return kincaidScore;
 	}
-	
+
 	public String cleanWord(String word) {
 		/**
-		 * A quick function to get rid of any junk around a word.
-		 * This is useful for cleaning a word before checking it's syllable count.
+		 * A quick function to get rid of any junk around a word. This is useful
+		 * for cleaning a word before checking it's syllable count.
 		 */
 		word = word.replaceAll("[^a-zA-Z]", "");
 		word = word.toLowerCase();
@@ -91,11 +95,11 @@ public class Lawrence {
 		 * Get syllable count whether it be in the dictionary or the dodgy
 		 * method.
 		 */
-		
+
 		if (syllables.get(word) != null)
 			return syllables.get(word);
 		else
-			return countSyllables(word);
+			return countSyllablesLight(word);
 	}
 
 	private void loadSyllableDict() throws IOException {
@@ -155,50 +159,13 @@ public class Lawrence {
 		return line;
 	}
 
-	private int countSyllables(String word) {
-		/**
-		 * Plan B to count syllables Count syllables that the dictionary method
-		 * could not. Counts number of vowels in word and assumes it is the same
-		 * as syllable count.
+	public int countSyllablesLight(String s) {
+		/** 
+		 * A simple syllable counter.
+		 * Use this as the plan B for when the dictionary method fails. 
 		 */
-		int count = 0;
-		word = word.toLowerCase();
-		for (int i = 0; i < word.length(); i++) {
-			if (word.charAt(i) == '\"' || word.charAt(i) == '\'' || word.charAt(i) == '-' || word.charAt(i) == ','
-					|| word.charAt(i) == ')' || word.charAt(i) == '(') {
-				word = word.substring(0, i) + word.substring(i + 1, word.length());
-			}
-		}
-		boolean isPrevVowel = false;
-		for (int j = 0; j < word.length(); j++) {
-			if (word.contains("a") || word.contains("e") || word.contains("i") || word.contains("o")
-					|| word.contains("u")) {
-				if (isVowel(word.charAt(j)) && !((word.charAt(j) == 'e') && (j == word.length() - 1))) {
-					if (isPrevVowel == false) {
-						count++;
-						isPrevVowel = true;
-					}
-				} else {
-					isPrevVowel = false;
-				}
-			} else {
-				count++;
-				break;
-			}
-		} 
-		if (count > 0) return count;
-		else return 1;
-	}
-
-	private boolean isVowel(char c) {
-		/**
-		 * Tells you if a letter is a vowel or not. This method is used by the
-		 * countSyllables() method.
-		 */
-		if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
-			return true;
-		} else {
-			return false;
-		}
+		int syllables = s.length() - s.toLowerCase().replaceAll("a|e|i|o|u|", "").length();
+		if (syllables < 1) return 1;
+		else return syllables;
 	}
 }

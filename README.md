@@ -57,7 +57,11 @@ Lawrence lawrence = new Lawrence(60, 50) // sets upperbound to 60 and lowerbound
 ### JAR library released and ready to go!
 If you want to use this library quickly, I reccommend downloading the JAR file from the 'releases' link above. Import this library into your Java project and then import and instantiate the object as shown above. 
 
+### Testing of syllable counter
 
+As the syllable counter is a vital part of the algorithm for measuring readability, I decided to benchmark my code. I tested my code on a dataset uploaded by a user on StackOverflow. I found 514 syllables over the entire document. I had a strike rate of 96.40% correct. This means my program only got 12 / 334 words wrong, regarding their syllable counts. 
+
+You can view the benchmark here: 
 
 
 
