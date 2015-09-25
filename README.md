@@ -33,7 +33,7 @@ System.out.println(lawrence.getSyllable("reasonable")); // 4
 ### Calculate the readability score of a sentence
 You can calculate the readability score of any sentence by just typing this code. The accuracy of this score depends heavily on the accuracy of the syllable counter. So this method call is very valueable and will be more accurate than most readability tests out there. The algorithm is called the Flesch-Kincaid score. 
 ```java
-System.out.println(lawrence.fleschKincaidSentence("Here is a good sentence.")); // output =circa 100
+System.out.println(lawrence.fleschKincaidSentence("Here is a good sentence.")); // output = 100.24000000000002
 ```
 
 ### Get the status of a sentence
@@ -43,6 +43,9 @@ I have specifically built this library to tell you whether a sentence should be 
 // 0 = good; 1 = needs toning; 2 = flabby.
 double[] scoreStatus = lawrence.getScoreAndStatus("Here is an unbelievably reconstruction longitudinal sentence that you may need to reconfiguration down.");
 System.out.println(scoreStatus[0] + " " + scoreStatus[1]);
+// output = 11.339285714285722 2.0
+// this means got a readability score of 11.34 and a status of 2,
+// which means the sentence was very flabby.
 ```
 
 ### You can customize the threshold levels if you want

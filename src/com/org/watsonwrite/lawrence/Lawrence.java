@@ -1,8 +1,8 @@
 package com.org.watsonwrite.lawrence;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,11 +91,11 @@ public class Lawrence {
 		 * Load in syllable dictionary using OpenCSV library. Place the array
 		 * into a dictionary.
 		 */
-		ClassLoader classLoader = getClass().getClassLoader();
-		File fileName = new File(
-				classLoader.getResource("com/org/watsonwrite/lawrence/resources/syllables.txt").getFile());
+		String csvPath = "/com/org/watsonwrite/lawrence/resources/syllables.txt";
+		InputStreamReader isr = new InputStreamReader(getClass().getResourceAsStream(csvPath));
+		BufferedReader br = new BufferedReader(isr);
 
-		CSVReader reader = new CSVReader(new FileReader(fileName));
+		CSVReader reader = new CSVReader(br);
 		String[] nextLine;
 		while ((nextLine = reader.readNext()) != null) {
 			syllables.put(nextLine[0], Integer.parseInt(nextLine[1]));
