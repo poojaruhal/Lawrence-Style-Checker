@@ -74,12 +74,24 @@ public class Lawrence {
 		double kincaidScore = fleschKincaid(wordCount, syllableCount);
 		return kincaidScore;
 	}
+	
+	public String cleanWord(String word) {
+		/**
+		 * A quick function to get rid of any junk around a word.
+		 * This is useful for cleaning a word before checking it's syllable count.
+		 */
+		word = word.replaceAll("[^a-zA-Z]", "");
+		word = word.toLowerCase();
+		word = word.trim();
+		return word;
+	}
 
 	public int getSyllable(String word) {
 		/**
 		 * Get syllable count whether it be in the dictionary or the dodgy
 		 * method.
 		 */
+		
 		if (syllables.get(word) != null)
 			return syllables.get(word);
 		else
@@ -173,8 +185,9 @@ public class Lawrence {
 				count++;
 				break;
 			}
-		}
-		return count;
+		} 
+		if (count > 0) return count;
+		else return 1;
 	}
 
 	private boolean isVowel(char c) {
