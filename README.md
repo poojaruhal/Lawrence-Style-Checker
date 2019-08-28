@@ -68,6 +68,8 @@ The output can be found here: [http://pastebin.com/LyiBTcbb](http://pastebin.com
 
 ### syllables.txt Dictionary available for Developers
 The file syllables.txt provided by watson.
+
+"Description by watson": 
 The original syllables.txt file was over 120,000 entries long. Thus, I trimmed it down to make this program faster. I did this by removing any entry that could be figured out with a simple vowel count algorithm. This reduced the file to around 50,000 entries. However, if you want the original dictionary file, I included it in the /dict folder. This may be useful for programmers who may wish to use the file for a different application. 
 
 
